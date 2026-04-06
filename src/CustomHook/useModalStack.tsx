@@ -50,22 +50,22 @@ const useModalStack = () => {
   };
 
   // Touch start
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.PointerEvent<HTMLDivElement>) => {
 
     dragging.current = true;
-    startY.current = e.touches[0].clientY;
+    startY.current = e.clientY;
 
     const top = modalRef.current.at(-1);
     if (top) top.style.transition = 'none';
   };
 
   // Touch move
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.PointerEvent<HTMLDivElement>) => {
      e.preventDefault(); // ✅ CRITICAL FIX FOR MOBILE DEVICES
 
     if (!dragging.current) return;
 
-    latestY.current = e.touches[0].clientY - startY.current;
+    latestY.current = e.clientY - startY.current;
 
     if (!rafId.current) {
       rafId.current = requestAnimationFrame(updateStyles);
