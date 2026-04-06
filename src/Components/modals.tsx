@@ -22,7 +22,10 @@ const Modals = ({modalsArray, handleClose}: Props) => {
         <div
           ref={(el) => registerModal(el, index)}
           key={index}
-          className="slideUpAnimation !rounded-t-lg z-10 min-h-[60%] bg-white bottom-0 fixed w-full"
+          className="slideUpAnimation !rounded-t-lg z-10 min-h-[60%] bg-white bottom-0 fixed w-full touch-none"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={() => handleTouchEnd(onClose)}
           onAnimationEnd={() => {
             if (modalRef.current[index]) {
               modalRef.current[index].style.animation = 'none';
@@ -32,10 +35,7 @@ const Modals = ({modalsArray, handleClose}: Props) => {
           style={getElementStyle(isTop, depth)}
         >
           <div
-            className="h-[48px] cursor-grab flex items-center justify-center touch-none"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={() => handleTouchEnd(onClose)}
+            className="h-[48px] cursor-grab flex items-center justify-center"
           >
             <div className="w-8 h-1 bg-gray-300 rounded-full" />
           </div>
