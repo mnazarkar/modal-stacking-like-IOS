@@ -35,21 +35,21 @@ function App() {
     ]);
   };
   const handleCloseModal = () => {
-    setShowModal(false);
+    modalsArray.length === 1 ? setShowModal(false) : null;
     setModalsArray((prev) => prev.slice(0, -1));
   }
 
   return (
     <>
-    <h1 className="text-3xl font-bold text-red-600 h-[200px] text-center">
-      Tailwind is working 🚀
-    </h1>
-    <button
+    <div className='flex flex-col items-center justify-center gap-8 h-[200px]'>
+      <h1 className="text-3xl font-bold text-red-600 text-center">IOS like Modal Stacking App</h1>
+      <button
       className='px-4 py-2 bg-green-500 text-white rounded'
       onClick={handleOpenModal}
     >
       Open Modal
     </button>
+    </div>
     {showModal && <Modals modalsArray={modalsArray} handleClose={()=> {setModalsArray((prev) => prev.slice(0, -1)); console.log('kkkkkkkkkkk');
     }} />}
     </>

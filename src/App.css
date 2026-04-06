@@ -1,0 +1,26 @@
+.slideUpAnimation {
+  animation: slideUp 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes slideDownFromMiddle {
+  100% {
+    transform: translateY(100%);
+  }
+}

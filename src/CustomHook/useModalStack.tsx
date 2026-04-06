@@ -15,20 +15,6 @@ const useModalStack = () => {
   const rafId = useRef<number | null>(null);
 
   const [divHeight, setDivHeight] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  // Mobile detection
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 768px)');
-
-    const handleChange = () => setIsMobile(media.matches);
-
-    handleChange();
-    media.addEventListener('change', handleChange);
-
-    return () => media.removeEventListener('change', handleChange);
-  }, []);
-
 
   // Register modal
   const registerModal = (el: HTMLDivElement | null, index: number) => {
@@ -48,7 +34,6 @@ const useModalStack = () => {
     closeCB: () => void,
     fromTouchEnd = false
   ) => {
-    if (isMobile) {
       if (modalRef.current.at(-2)) {
         modalRef.current.at(-2)!.style.transform =
           'translateY(0) scale(1)';
@@ -56,11 +41,7 @@ const useModalStack = () => {
 
       modalRef.current.at(-1)!.style.animation = `${
         fromTouchEnd ? 'slideDownFromMiddle' : 'slideDown'
-      } 0.35s cubic-bezier(0.22,1,0.36,1) forwards`;
-    } else {
-      modalRef.current.at(-1)!.style.animation =
-        'slideLeftClose 0.35s cubic-bezier(0.22,1,0.36,1) forwards';
-    }
+      } 0.45s cubic-bezier(0.22,1,0.36,1) forwards`;
 
     setTimeout(() => {
       closeCB();
@@ -71,7 +52,6 @@ const useModalStack = () => {
 
   // Touch start
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (!isMobile) return;
 
     dragging.current = true;
     startY.current = e.touches[0].clientY;
@@ -82,7 +62,6 @@ const useModalStack = () => {
 
   // Touch move
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!dragging.current || !isMobile) return;
 
     latestY.current = e.touches[0].clientY - startY.current;
 
@@ -147,7 +126,6 @@ const useModalStack = () => {
 
   // Touch end
   const handleTouchEnd = (onClose: () => void) => {
-    if (!isMobile) return;
 
     dragging.current = false;
 
@@ -189,7 +167,6 @@ const useModalStack = () => {
 
   // Resize observer
   useLayoutEffect(() => {
-    if (!isMobile) return;
 
     const top = modalRef.current.at(-1);
     if (!top) return;
@@ -209,7 +186,6 @@ const useModalStack = () => {
   });
 
   const getElementStyle = (isTop: boolean, depth: number) => {
-    if (!isMobile) return {};
 
     return {
       height: !isTop && divHeight ? `${divHeight}px` : 'auto',

@@ -22,7 +22,7 @@ const Modals = ({modalsArray, handleClose}: Props) => {
         <div
           ref={(el) => registerModal(el, index)}
           key={index}
-          className="!rounded-t-lg z-10 min-h-[60%] bg-white bottom-0 fixed w-full"
+          className="slideUpAnimation !rounded-t-lg z-10 min-h-[60%] bg-white bottom-0 fixed w-full"
           onAnimationEnd={() => {
             if (modalRef.current[index]) {
               modalRef.current[index].style.animation = 'none';
@@ -32,12 +32,12 @@ const Modals = ({modalsArray, handleClose}: Props) => {
           style={getElementStyle(isTop, depth)}
         >
           <div
-            className="pdrag__draggables lg:hidden"
+            className="h-[48px] cursor-grab flex items-center justify-center"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={() => handleTouchEnd(onClose)}
           >
-            <div className="pdrag__draggable" />
+            <div className="w-8 h-1 bg-gray-300 rounded-full" />
           </div>
 
           {typeof content === 'function' ? content() : content}
@@ -50,7 +50,7 @@ const Modals = ({modalsArray, handleClose}: Props) => {
     if (!modalsArray.length) return null;
 
     return (
-      <div className='h-full w-full fixed inset-0 bg-black/50' onClick={() => handleCloseFunc(handleClose)}>
+      <div className='h-full w-full fixed inset-0 bg-black/50 backdrop-blur-xl' onClick={() => handleCloseFunc(handleClose)}>
         {renderArray(modalsArray)}
       </div>
     );
