@@ -32,7 +32,7 @@ const Modals = ({modalsArray, handleClose}: Props) => {
           style={getElementStyle(isTop, depth)}
         >
           <div
-            className="h-[48px] cursor-grab flex items-center justify-center"
+            className="h-[48px] cursor-grab flex items-center justify-center touch-none"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={() => handleTouchEnd(onClose)}

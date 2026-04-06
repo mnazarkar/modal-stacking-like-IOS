@@ -61,6 +61,9 @@ const useModalStack = () => {
 
   // Touch move
   const handleTouchMove = (e: React.TouchEvent) => {
+     e.preventDefault(); // ✅ CRITICAL FIX FOR MOBILE DEVICES
+
+    if (!dragging.current) return;
 
     latestY.current = e.touches[0].clientY - startY.current;
 
