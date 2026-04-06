@@ -22,7 +22,7 @@ const Modals = ({modalsArray, handleClose}: Props) => {
         <div
           ref={(el) => registerModal(el, index)}
           key={index}
-          className="!rounded-t-lg z-10 h-[100%] min-h-[60%] bg-white bottom-0 fixed w-full"
+          className="!rounded-t-lg z-10 min-h-[60%] bg-white bottom-0 fixed w-full"
           onAnimationEnd={() => {
             if (modalRef.current[index]) {
               modalRef.current[index].style.animation = 'none';
