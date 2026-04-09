@@ -38,8 +38,8 @@ const useModalStack = () => {
         const depth = len - 1 - i;
         modalRef.current[i].style.transform =
           depth === 0
-            ? 'translateY(0) scale(1)'
-            : `translateY(-${depth * 28}px) scale(${1 - depth * 0.04})`;
+            ? 'translate3d(0, 0, 0)'
+            : `translate3d(0, -${depth * 28}px, 0) scale(${1 - depth * 0.04})`;
         modalRef.current[i].style.height = `${
           modalMetaRef.current[len - 1]?.originalHeight
         }px`;
@@ -93,7 +93,7 @@ const useModalStack = () => {
     const topIndex = len - 1;
 
     const topModal = modalRef.current[topIndex];
-    topModal.style.transform = `translateY(${currentY}px)`;
+    topModal.style.transform = `translate3d(0, ${currentY}px, 0)`;
 
     for (let i = topIndex - 1; i >= 0; i--) {
       const modal = modalRef.current[i];
@@ -112,9 +112,9 @@ const useModalStack = () => {
       );
 
       modal.style.transition = 'none';
-      modal.style.transform = `translateY(${newTranslate}px) scale(${newScale})`;
+      modal.style.transform = `translate3d(0, ${newTranslate}px, 0) scale(${newScale})`;
 
-      const prevMeta = modalMetaRef.current[i];
+      const prevMeta = modalMetaRef.current[topIndex - 1];
       const topMeta = modalMetaRef.current[topIndex];
 
       if (prevMeta && topMeta) {
@@ -167,8 +167,8 @@ const useModalStack = () => {
 
         modalRef.current[i].style.transform =
           depth === 0
-            ? 'translateY(0)'
-            : `translateY(-${depth * 28}px) scale(${1 - depth * 0.04})`;
+            ? 'translate3d(0, 0, 0)'
+            : `translate3d(0, -${depth * 28}px, 0) scale(${1 - depth * 0.04})`;
 
         if (i !== topIndex) {
           modalRef.current[i].style.height = `${
@@ -206,13 +206,14 @@ const useModalStack = () => {
     return {
       height: !isTop && divHeight ? `${divHeight}px` : 'auto',
       transform: !isTop
-        ? `translateY(-${depth * 28}px) scale(${1 - depth * 0.04})`
+        ? `translate3d(0, -${depth * 28}px, 0) scale(${1 - depth * 0.04})`
         : '',
       boxShadow:
         '0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
       transition:
         'transform 0.45s cubic-bezier(0.22,1,0.36,1), height 0.45s cubic-bezier(0.22,1,0.36,1)',
       overflow: !isTop ? 'hidden' : undefined,
+      willChange: 'transform, height',
     } as React.CSSProperties;
   };
 
