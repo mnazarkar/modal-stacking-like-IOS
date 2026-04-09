@@ -20,7 +20,7 @@ function App() {
       {
         onClose: handleCloseModal,
         content: (
-          <div className='p-4 flex flex-col items-center justify-center'>
+          <div className={`'p-4 flex flex-col items-center justify-center' ${prev.length === 2 ? 'h-[80dvh]' : ''}`}>
             <h2 className='text-xl font-bold mb-4'>Modal {prev.length + 1}</h2>
             <div className='text-center bg-gray-200 p-4 w-[80%] rounded-lg shadow-md shadow-black/30'>
               <div>Click on Overlay to Close the Modal</div>
@@ -61,8 +61,7 @@ function App() {
       Open Modal
     </button>
     </div>
-    {showModal && <Modals modalsArray={modalsArray} handleClose={()=> {setModalsArray((prev) => prev.slice(0, -1)); console.log('kkkkkkkkkkk');
-    }} />}
+    {showModal && <Modals modalsArray={modalsArray} handleClose={()=> setModalsArray((prev) => prev.slice(0, -1))} />}
     </>
   )
 }

@@ -33,11 +33,19 @@ const useModalStack = () => {
     closeCB: () => void,
     fromTouchEnd = false
   ) => {
-      if (modalRef.current.at(-2)) {
-        modalRef.current.at(-2)!.style.transform =
-          'translateY(0) scale(1)';
+    const len = modalRef.current.length - 1;
+      for (let i = 0; i < len; i++) {
+        const depth = len - 1 - i;
+        modalRef.current[i].style.transform =
+          depth === 0
+            ? 'translateY(0) scale(1)'
+            : `translateY(-${depth * 28}px) scale(${1 - depth * 0.04})`;
+        modalRef.current[i].style.height = `${
+          modalMetaRef.current[len - 1]?.originalHeight
+        }px`;
+        modalRef.current[i].style.transition =
+          'transform 0.45s cubic-bezier(0.22,1,0.36,1), height 0.45s cubic-bezier(0.22,1,0.36,1)';
       }
-
       modalRef.current.at(-1)!.style.animation = `${
         fromTouchEnd ? 'slideDownFromMiddle' : 'slideDown'
       } 0.45s cubic-bezier(0.22,1,0.36,1) forwards`;
@@ -106,17 +114,23 @@ const useModalStack = () => {
       modal.style.transition = 'none';
       modal.style.transform = `translateY(${newTranslate}px) scale(${newScale})`;
 
-      if (depth === 1) {
-        const prevMeta = modalMetaRef.current[i];
-        const topMeta = modalMetaRef.current[topIndex];
+      const prevMeta = modalMetaRef.current[i];
+      const topMeta = modalMetaRef.current[topIndex];
 
-        if (prevMeta && topMeta) {
-          const difference =
-            topMeta.originalHeight - prevMeta.originalHeight;
+      if (prevMeta && topMeta) {
+        const difference =
+          topMeta.originalHeight - prevMeta.originalHeight;
 
+        if (difference > 0) {
           modal.style.height = `${Math.max(
             topMeta.originalHeight -
-              difference * Math.min(currentY / 120, 1),
+            difference * Math.min(currentY / 120, 1),
+            prevMeta.originalHeight
+          )}px`;
+        } else {
+          modal.style.height = `${Math.min(
+            topMeta.originalHeight -
+            difference * Math.min(currentY / 120, 1),
             prevMeta.originalHeight
           )}px`;
         }
