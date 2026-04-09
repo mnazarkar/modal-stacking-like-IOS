@@ -49,7 +49,7 @@ function App() {
     <>
     <div className='flex flex-col items-center justify-center gap-8 p-4 h-[100dvh] bg-gradient-to-tl from-pink-300 to-violet-600'>
       <h1 className="text-3xl font-bold text-[rgb(93_15_155)] text-center">IOS like Modal Stacking App</h1>
-      <div className='text-center px-4 bg-black bg-opacity-50 py-4 rounded-xl w-[80%] shadow-xl shadow-black/50'>
+      <div className='text-center px-4 bg-black bg-opacity-30 py-4 rounded-xl w-[80%] shadow-xl shadow-black/50'>
         <div className="text-lg text-white">Stack multiple modals like iOS</div>
         <div className="text-md text-white">Drag down to close the top modal</div>
         <div className="text-sm text-white">Switch to Mobile View for better experience if you are on desktop</div>
