@@ -22,14 +22,14 @@ function App() {
         content: (
           <div className='p-4 flex flex-col items-center justify-center'>
             <h2 className='text-xl font-bold mb-4'>Modal {prev.length + 1}</h2>
-            <div className='text-center bg-gray-200 p-4 rounded-lg shadow-md shadow-black/30'>
+            <div className='text-center bg-gray-200 p-4 w-[80%] rounded-lg shadow-md shadow-black/30'>
               <div>Click on Overlay to Close the Modal</div>
               <div>OR</div>
               <div>Drag Down to Close the Modal</div>
             </div>
             {prev.length < 4 && (
               <button
-                className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg shadow-black/50'
+                className='mt-4 px-4 py-2 w-[80%] bg-blue-600 text-white rounded-lg shadow-lg shadow-black/50'
                 onClick={handleOpenModal}
               >
                 Open Another Modal
@@ -55,7 +55,7 @@ function App() {
         <div className="text-sm text-white">Switch to Mobile View for better experience if you are on desktop</div>
       </div>
       <button
-      className='px-4 py-2 bg-green-600 text-white rounded-lg shadow-lg shadow-black/50'
+      className='px-4 py-2 w-[80%] bg-green-600 text-white rounded-lg shadow-lg shadow-black/50'
       onClick={handleOpenModal}
     >
       Open Modal
